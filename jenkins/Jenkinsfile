@@ -12,6 +12,7 @@ pipeline {
             steps {
                 echo 'Install requirements'
                 sh 'pwd'
+                sh 'ls -l'
                 //sh 'cp /tmp/aufgabe1/requirements.txt .'
                 sh 'pip install -r requirements.txt'
             }
