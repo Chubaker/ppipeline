@@ -15,7 +15,7 @@ pipeline {
             steps {
                echo 'manuell scp copying'
                sh 'scp app.py jenkins@35.233.184.244:/tmp'
-               sh 'scp test.py jenkins@@35.233.184.244:/tmp'
+               sh 'scp test.py jenkins@35.233.184.244:/tmp'
             }
         }
         
