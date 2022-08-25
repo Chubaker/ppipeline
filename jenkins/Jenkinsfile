@@ -2,23 +2,23 @@ pipeline {
     agent any
        
     stages {
-        stage('Install requirements') {
+        stage('Install requirements on DEV server') {
             steps {
-                echo 'Install requirements'
+                echo 'Install requirements on DEV server'
                 sh 'pwd'                              
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'appserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'pip install -r requirements.txt', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'requirements.txt')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }       
-        stage('Start Flask WebApp') {
+        stage('Start Flask WebApp on DEV server') {
             steps {
-                echo 'Start Flask WebApp'
+                echo 'Start Flask WebApp on DEV server'
                 sh 'pwd'
                 sh "ssh jenkins@35.233.184.244 'timeout 10s nohup python3 app.py &'"                
             }
         }
-        stage('Test') {
+        stage('Test on DEV server') {
             steps {
-                echo 'Test'
+                echo 'Test on DEV server'
                 sh 'pwd'
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'appserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'python3 test.py', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'test.py')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
