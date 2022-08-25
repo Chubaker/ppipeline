@@ -1,12 +1,13 @@
 pipeline {
     agent any
+       
+    stages {
 
         stage('Install requirements') {
             steps {
                 echo 'Install requirements'
                 sh 'pwd'
-                sh 'ls -l'
-                //sh 'cp /tmp/aufgabe1/requirements.txt .'
+                sh 'cp /tmp/aufgabe1/requirements.txt .'
                 sh 'pip install -r requirements.txt'
             }
         }
@@ -15,7 +16,7 @@ pipeline {
             steps {
                 echo 'Start Flask WebApp'
                 sh 'pwd'
-                //sh 'cp /tmp/aufgabe1/app.py .'
+                sh 'cp /tmp/aufgabe1/app.py .'
                 sh 'nohup /usr/bin/python3 app.py &'
             }
         }
@@ -23,7 +24,7 @@ pipeline {
             steps {
                 echo 'Test'
                 sh 'pwd'
-                //sh 'cp /tmp/aufgabe1/test.py .'
+                sh 'cp /tmp/aufgabe1/test.py .'
                 sh '/usr/bin/python3 test.py'
             }
             post {
