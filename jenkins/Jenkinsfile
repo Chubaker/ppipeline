@@ -14,7 +14,7 @@ pipeline {
         stage('SCP-Test'){
             steps {
                echo 'SCP-Test'
-               sh 'scp requirement.txt jenkins@@35.233.184.244:/tmp'
+               sh 'scp requirement.txt jenkins@35.233.184.244:/tmp'
             }
         }
         
