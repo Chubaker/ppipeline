@@ -2,7 +2,6 @@ pipeline {
     agent any
        
     stages {
-
         stage('Install requirements') {
             steps {
                 echo 'Install requirements'
@@ -11,16 +10,14 @@ pipeline {
                 //sh 'pip install -r requirements.txt'
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'appserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'pip install -r requirements.txt', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'requirements.txt')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
-        }
-       
+        }       
         stage('Start Flask WebApp') {
             steps {
                 echo 'Start Flask WebApp'
                 sh 'pwd'
                 //sh 'cp /tmp/aufgabe1/app.py .'
                 //sh 'nohup /usr/bin/python3 app.py &'
-                sh "ssh jenkins@35.233.184.244 'timeout 10s nohup python3 app.py &'"
-                
+                sh "ssh jenkins@35.233.184.244 'timeout 10s nohup python3 app.py &'"                
             }
         }
         stage('Test') {
