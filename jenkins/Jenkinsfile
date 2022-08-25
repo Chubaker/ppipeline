@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+       
+    stages {
+        stage('Clean Up') {
+            steps{
+                echo 'Cleaning Up'
+                deleteDir()
+            }
+        }
+        stage('Install requirements') {
+            steps {
+                echo 'Install requirements'
+                sh 'pwd'
+                sh 'cp /tmp/aufgabe1/requirements.txt .'
+                sh 'pip install -r requirements.txt'
+            }
+        }
+       
+        stage('Start Flask WebApp') {
+            steps {
+                echo 'Start Flask WebApp'
+                sh 'pwd'
+                sh 'cp /tmp/aufgabe1/app.py .'
+                sh 'nohup /usr/bin/python3 app.py &'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test'
+                sh 'pwd'
+                sh 'cp /tmp/aufgabe1/test.py .'
+                sh '/usr/bin/python3 test.py'
+            }
+            post {
+                always {
+                    junit 'test-reports/*.xml'
+                }
+            }
+        }
+       
+    }
+}
