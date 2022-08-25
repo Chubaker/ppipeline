@@ -1,13 +1,13 @@
 pipeline {
     agent any
        
-    stages {
-        stage('Clean Up') {
-            steps{
-                echo 'Cleaning Up'
-                deleteDir()
-            }
-        }
+   // stages {
+     //   stage('Clean Up') {
+       //     steps{
+         //       echo 'Cleaning Up'
+           //     deleteDir()
+           // }
+       // }
         stage('Install requirements') {
             steps {
                 echo 'Install requirements'
