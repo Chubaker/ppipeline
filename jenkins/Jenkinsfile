@@ -1,18 +1,10 @@
 pipeline {
     agent any
 
-    environment{
-        def devserver = "35.223.184.244"
-    }
-
-    parameters{
-        string(defaultValue:"DEV", description: "Which environment to deploy?", name: "deployEnv")
-    }
-       
     stages {
-        stage('Install requirements on server') {
+        stage('Install requirements on DEV server') {
             steps {
-                echo 'Install requirements on ${deployEnv} server'
+                echo 'Install requirements on DEV server'
                 sh 'pwd'                              
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'appserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'pip install -r requirements.txt', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'requirements.txt')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
