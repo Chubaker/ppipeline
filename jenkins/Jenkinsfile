@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'Start Flask WebApp on DEV server'
                 sh 'pwd'
-                sh "ssh jenkins@35.233.184.244 'timeout 10s nohup python3 app.py &'"                
+                sh "ssh jenkins@34.105.111.88 'timeout 10s nohup python3 app.py &'"                
             }
         }
         stage('Test on DEV server') {
